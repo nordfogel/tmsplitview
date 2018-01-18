@@ -71,6 +71,7 @@ extension ListingsViewController {
             
             cell.textLabel?.text = cellViewModel.title
             cell.detailTextLabel?.text = cellViewModel.subtitle
+            cell.imageView?.image = UIImage(named: "placeholder")
             
             viewModel?.imageCompletion(at: indexPath, completion: { (image) in
                 
