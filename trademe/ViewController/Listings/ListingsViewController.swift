@@ -28,7 +28,13 @@ extension ListingsViewController: CategorySelectionDelegate {
     func didSelectCategory(with id: String) {
         viewModel?.fetchListings(for: id)
     }
+    
+    func didFinish(with searchString: String, categoryId: String) {
+        viewModel?.fetchListings(for: categoryId, searchString: searchString)
+    }
 }
+
+
 final class ListingsViewController: UITableViewController {
 
     @IBOutlet var activityView: UIActivityIndicatorView!

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11267A9E200FEBAC003FD027 /* FetchImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11267A9D200FEBAC003FD027 /* FetchImageOperation.swift */; };
+		11267AA020114A0D003FD027 /* SearchKeyApiResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11267A9F20114A0D003FD027 /* SearchKeyApiResource.swift */; };
 		1151ADFD200EAF9900ACC4F2 /* TradeMeApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151ADFC200EAF9900ACC4F2 /* TradeMeApiClient.swift */; };
 		1151AE01200EB70C00ACC4F2 /* ListingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151AE00200EB70C00ACC4F2 /* ListingDetailViewController.swift */; };
 		1151AE04200EBAA500ACC4F2 /* ListingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151AE03200EBAA500ACC4F2 /* ListingsViewModel.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		11267A9D200FEBAC003FD027 /* FetchImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageOperation.swift; sourceTree = "<group>"; };
+		11267A9F20114A0D003FD027 /* SearchKeyApiResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeyApiResource.swift; sourceTree = "<group>"; };
 		1151ADFC200EAF9900ACC4F2 /* TradeMeApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMeApiClient.swift; sourceTree = "<group>"; };
 		1151AE00200EB70C00ACC4F2 /* ListingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailViewController.swift; sourceTree = "<group>"; };
 		1151AE03200EBAA500ACC4F2 /* ListingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsViewModel.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				8627FA8C200AA3B3007EF28F /* SearchResult.swift */,
 				8627FA97200AA4B9007EF28F /* SearchApiResource.swift */,
+				11267A9F20114A0D003FD027 /* SearchKeyApiResource.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				8627FAA0200AA6D6007EF28F /* NetworkRequest.swift in Sources */,
 				8627FA91200AA410007EF28F /* Photo.swift in Sources */,
 				11267A9E200FEBAC003FD027 /* FetchImageOperation.swift in Sources */,
+				11267AA020114A0D003FD027 /* SearchKeyApiResource.swift in Sources */,
 				8627FA89200A4056007EF28F /* CategoryApiResource.swift in Sources */,
 				1151AE04200EBAA500ACC4F2 /* ListingsViewModel.swift in Sources */,
 				8627FAA4200AAAB9007EF28F /* ListingsViewController.swift in Sources */,

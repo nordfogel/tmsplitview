@@ -11,6 +11,7 @@ import UIKit
 
 protocol SearchRequestViewModelProtocol {
     func fetchListings(for category: String)
+    func fetchListings(for category: String, searchString: String)
     func imageCompletion(at indexPath: IndexPath, completion: @escaping (UIImage?) -> Void)
 }
 
@@ -90,6 +91,23 @@ final class ListingsViewModel: ListingsViewModelProtocol {
 
                 self?.cellViewModels = searchResult.listings.map({ ListingCellViewModel(listing: $0) })
            
+            self?.isLoading = false
+        }) { [weak self] (error) in
+            print(error.debugDescription)
+            self?.errorClosure?("Oops", error.debugDescription)
+            self?.isLoading = false
+        }
+    }
+    
+    func fetchListings(for category: String, searchString: String) {
+        self.fetchImageQueue.cancelAllOperations()
+        self.fetchImageOperations.removeAll()
+        
+        self.isLoading = true
+        request = apiClient.searchKeyRequest(for: searchString, category: category, with: { [weak self] (searchResult) in
+            
+            self?.cellViewModels = searchResult.listings.map({ ListingCellViewModel(listing: $0) })
+            
             self?.isLoading = false
         }) { [weak self] (error) in
             print(error.debugDescription)

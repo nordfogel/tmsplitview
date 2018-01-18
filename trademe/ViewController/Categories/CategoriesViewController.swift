@@ -10,6 +10,7 @@ import UIKit
 
 protocol CategorySelectionDelegate: class {
     func didSelectCategory(with id: String)
+    func didFinish(with searchString: String, categoryId: String)
 }
 
 final class CategoriesViewController: UITableViewController {
@@ -19,6 +20,7 @@ final class CategoriesViewController: UITableViewController {
     @IBOutlet var allButton: UIButton!
     @IBOutlet var listingsBarButton: UIBarButtonItem!
     @IBOutlet var countLabel: UILabel!
+    @IBOutlet var searchBar: UISearchBar!
     @IBAction func didTapButton(sender: Any?) {
         
         if let indexPath = viewModel?.selectedIndexPath {
@@ -120,5 +122,14 @@ final class CategoriesViewController: UITableViewController {
             destination.viewModel = viewModel?.viewModelForSelectedSubcategory()
             destination.delegate = self.delegate
         }
+    }
+}
+
+extension CategoriesViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, let categoryId = viewModel?.identifierForSelectedCategory {
+            self.delegate?.didFinish(with: text, categoryId: categoryId)
+        }
+        searchBar.resignFirstResponder()
     }
 }

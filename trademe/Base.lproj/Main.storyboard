@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="irB-sX-mcZ">
-                            <rect key="frame" x="0.0" y="0.0" width="295" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="295" height="90"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pSG-eb-yfs">
@@ -94,39 +94,49 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzk-vJ-Njc">
-                                    <rect key="frame" x="0.0" y="34" width="295" height="30"/>
+                                    <rect key="frame" x="0.0" y="60" width="295" height="30"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     <connections>
                                         <action selector="didTapButtonWithSender:" destination="vsC-tn-1GO" eventType="touchUpInside" id="EKJ-Bb-u4X"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Listings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llR-cV-Qf9">
-                                    <rect key="frame" x="16" y="38" width="90" height="21"/>
+                                    <rect key="frame" x="16" y="64" width="90" height="21"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjD-f4-ohz">
-                                    <rect key="frame" x="250.66666666666663" y="38" width="10.333333333333343" height="21"/>
+                                    <rect key="frame" x="250.66666666666666" y="64" width="10.333333333333343" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="G83-Ck-9C8">
+                                    <rect key="frame" x="0.0" y="0.0" width="295" height="56"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="vsC-tn-1GO" id="RzD-lO-PTp"/>
+                                    </connections>
+                                </searchBar>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="dzk-vJ-Njc" firstAttribute="leading" secondItem="irB-sX-mcZ" secondAttribute="leading" id="3Fz-Cq-8R2"/>
                                 <constraint firstAttribute="trailing" secondItem="GjD-f4-ohz" secondAttribute="trailing" constant="34" id="3nG-Oi-l5Z"/>
                                 <constraint firstAttribute="bottom" secondItem="dzk-vJ-Njc" secondAttribute="bottom" id="8l0-zT-GPE"/>
+                                <constraint firstItem="G83-Ck-9C8" firstAttribute="top" secondItem="irB-sX-mcZ" secondAttribute="top" id="FYM-YD-PN6"/>
                                 <constraint firstAttribute="bottom" secondItem="GjD-f4-ohz" secondAttribute="bottom" constant="5" id="HGJ-7e-tWe"/>
                                 <constraint firstAttribute="trailing" secondItem="dzk-vJ-Njc" secondAttribute="trailing" id="XaB-B4-56F"/>
+                                <constraint firstItem="G83-Ck-9C8" firstAttribute="leading" secondItem="irB-sX-mcZ" secondAttribute="leading" id="p2m-55-nxC"/>
                                 <constraint firstAttribute="bottom" secondItem="llR-cV-Qf9" secondAttribute="bottom" constant="5" id="rAu-60-MCl"/>
                                 <constraint firstItem="llR-cV-Qf9" firstAttribute="leading" secondItem="irB-sX-mcZ" secondAttribute="leading" constant="16" id="tdi-9x-Ejt"/>
+                                <constraint firstAttribute="trailing" secondItem="G83-Ck-9C8" secondAttribute="trailing" id="w6A-RI-Qnd"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="rIp-lp-vPo" detailTextLabel="HDN-EF-XP7" style="IBUITableViewCellStyleValue1" id="XdN-xg-nYX">
-                                <rect key="frame" x="0.0" y="92" width="295" height="44"/>
+                                <rect key="frame" x="0.0" y="118" width="295" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XdN-xg-nYX" id="7CJ-BI-0YM">
                                     <rect key="frame" x="0.0" y="0.0" width="261" height="43.666666666666664"/>
@@ -168,6 +178,7 @@
                         <outlet property="allButton" destination="dzk-vJ-Njc" id="wBS-0d-wLV"/>
                         <outlet property="countLabel" destination="GjD-f4-ohz" id="DPj-Jr-Z9r"/>
                         <outlet property="listingsBarButton" destination="Cl6-0d-XeL" id="ZUy-Kv-1V2"/>
+                        <outlet property="searchBar" destination="G83-Ck-9C8" id="Pb7-OK-aj1"/>
                         <segue destination="mNW-pe-eQa" kind="show" identifier="ShowListings" id="O3C-zt-wA7"/>
                     </connections>
                 </tableViewController>
