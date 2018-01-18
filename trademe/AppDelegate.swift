@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  trademe
 //
-//  Created by Bjoern Bengelsdorf on 11.01.18.
+//  Created by Bjoern Bengelsdorf on 13.01.18.
 //  Copyright © 2018 bengelsdorf. All rights reserved.
 //
 
@@ -15,7 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        guard let splitViewController = window?.rootViewController as? UISplitViewController,
+            let leftNavController = splitViewController.viewControllers.first as? UINavigationController,
+            let masterViewController = leftNavController.topViewController as? CategoriesViewController,
+            let rightNavController = splitViewController.viewControllers.last as? UINavigationController,
+            let detailViewController = rightNavController.topViewController as? ListingsViewController
+            else { fatalError() }
+        
+        let apiClient = TradeMeApiClient()
+        let categoriesViewModel = CategoriesViewModel(apiClient: apiClient, category: Category(name: "Categories", identifier: "0", hierarchyPath: nil, subcategories: nil, numberOfItemsForSale: nil, isLeaf: true))
+        masterViewController.viewModel = categoriesViewModel
+        masterViewController.delegate = detailViewController
+        
+        let listingsViewModel = ListingsViewModel(apiClient: apiClient)
+        detailViewController.viewModel = listingsViewModel
+
         return true
     }
 
@@ -40,7 +54,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
