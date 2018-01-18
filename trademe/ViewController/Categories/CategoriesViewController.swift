@@ -129,8 +129,8 @@ final class CategoriesViewController: UITableViewController {
 
 extension CategoriesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text, let categoryId = viewModel?.identifierForSelectedCategory {
-            viewModel?.searchString = text
+        if let text = searchBar.text, let categoryId = viewModel?.identifierForSelectedCategory, var viewModel = viewModel, viewModel.searchString != text && text != "" {
+            viewModel.searchString = text
             self.delegate?.didEnter(text, for: categoryId)
         }
         searchBar.resignFirstResponder()
