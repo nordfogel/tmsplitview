@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 protocol SearchRequestViewModelProtocol {
-    func fetchListings(for category: String)
-    func fetchListings(for category: String, searchString: String)
+    func fetchListings(for searchString: String, in category: String)
     func imageCompletion(at indexPath: IndexPath, completion: @escaping (UIImage?) -> Void)
 }
 
@@ -20,6 +19,7 @@ typealias ListingsViewModelProtocol = ListViewModelProtocol & SearchRequestViewM
 
 
 final class ListingsViewModel: ListingsViewModelProtocol {
+    
     var title: String {
         return "Listings"
     }
@@ -82,29 +82,12 @@ final class ListingsViewModel: ListingsViewModelProtocol {
         return cellViewModels[index]
     }
     
-    func fetchListings(for category: String) {
+    func fetchListings(for searchString: String, in category: String) {
         self.fetchImageQueue.cancelAllOperations()
         self.fetchImageOperations.removeAll()
         
         self.isLoading = true
-        request = apiClient.searchRequest(for: category, with: { [weak self] (searchResult) in
-
-                self?.cellViewModels = searchResult.listings.map({ ListingCellViewModel(listing: $0) })
-           
-            self?.isLoading = false
-        }) { [weak self] (error) in
-            print(error.debugDescription)
-            self?.errorClosure?("Oops", error.debugDescription)
-            self?.isLoading = false
-        }
-    }
-    
-    func fetchListings(for category: String, searchString: String) {
-        self.fetchImageQueue.cancelAllOperations()
-        self.fetchImageOperations.removeAll()
-        
-        self.isLoading = true
-        request = apiClient.searchKeyRequest(for: searchString, category: category, with: { [weak self] (searchResult) in
+        request = apiClient.searchRequest(for: searchString, in: category, with: { [weak self] (searchResult) in
             
             self?.cellViewModels = searchResult.listings.map({ ListingCellViewModel(listing: $0) })
             

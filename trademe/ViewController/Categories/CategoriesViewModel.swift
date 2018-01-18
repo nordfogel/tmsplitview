@@ -41,6 +41,7 @@ protocol ListViewModelProtocol {
 }
 
 protocol SubcategoryViewModelProtocol {
+    var searchString: String { get set }
     var totalCount: String { get }
     var identifierForSelectedCategory: String? { get }
     var selectedIndexPath: IndexPath? { get set }
@@ -53,9 +54,11 @@ protocol SubcategoryViewModelProtocol {
 typealias CategoriesViewModelProtocol = ListViewModelProtocol & SubcategoryViewModelProtocol
 
 
-final class CategoriesViewModel: CategoriesViewModelProtocol { //NSObject,
+final class CategoriesViewModel: CategoriesViewModelProtocol {
 
-    let apiClient: TradeMeApiProtocol //& NSObjectProtocol
+    let apiClient: TradeMeApiProtocol
+    
+    var searchString: String = ""
     
     private var request: ApiRequest<CategoryApiResource>?
     private var model: Category
@@ -130,7 +133,9 @@ final class CategoriesViewModel: CategoriesViewModelProtocol { //NSObject,
             return nil
         }
         if let subcategory = model.subcategories?[index] {
-            return CategoriesViewModel(apiClient: apiClient, category: subcategory)
+            let viewModel = CategoriesViewModel(apiClient: apiClient, category: subcategory)
+            viewModel.searchString = searchString
+            return viewModel
         }
         return nil
     }

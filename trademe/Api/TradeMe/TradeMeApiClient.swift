@@ -13,8 +13,7 @@ protocol TradeMeApiProtocol {
     func imageRequest(for url: URL, with completion: @escaping (UIImage) -> Void, failure: @escaping (Error?) -> Void) -> ImageRequest
     func listingRequest(for listingIdentifier: String, with completion: @escaping (Listing) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<ListingApiResource>
     func categoryRequest(for categoryIdentifier: String, searchDepth: UInt?, with completion: @escaping (Category) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<CategoryApiResource>
-    func searchRequest(for categoryIdentifier: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchApiResource>
-    func searchKeyRequest(for searchKey: String, category categoryIdentifier: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchKeyApiResource>
+    func searchRequest(for searchKey: String, in category: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchApiResource>
 }
 
 
@@ -57,15 +56,8 @@ final class TradeMeApiClient: NSObject, TradeMeApiProtocol {
         return request
     }
     
-    func searchRequest(for categoryIdentifier: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchApiResource> {
-        let resource = SearchApiResource(categoryIdentifier: categoryIdentifier)
-        let request = ApiRequest(resource: resource, urlSession: urlSession)
-        request.load(with: completion, failure: failure)
-        return request
-    }
-    
-    func searchKeyRequest(for searchKey: String, category categoryIdentifier: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchKeyApiResource> {
-        let resource = SearchKeyApiResource(searchString: searchKey, categoryIdentifier: categoryIdentifier)
+    func searchRequest(for searchKey: String, in category: String, with completion: @escaping (SearchResult) -> Void, failure: @escaping (Error?) -> Void) -> ApiRequest<SearchApiResource> {
+        let resource = SearchApiResource(searchString: searchKey, categoryIdentifier: category)
         let request = ApiRequest(resource: resource, urlSession: urlSession)
         request.load(with: completion, failure: failure)
         return request

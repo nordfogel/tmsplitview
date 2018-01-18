@@ -10,7 +10,7 @@ import UIKit
 
 protocol CategorySelectionDelegate: class {
     func didSelectCategory(with id: String)
-    func didFinish(with searchString: String, categoryId: String)
+    func didEnter(_ searchString: String, for category: String)
 }
 
 final class CategoriesViewController: UITableViewController {
@@ -28,8 +28,8 @@ final class CategoriesViewController: UITableViewController {
         }
         viewModel?.selectedIndexPath = nil
         allButton.backgroundColor = UIColor.groupTableViewBackground
-        if let categoryId = self.viewModel?.identifierForSelectedCategory {
-            self.delegate?.didSelectCategory(with: categoryId)
+        if let categoryId = self.viewModel?.identifierForSelectedCategory, let searchString = self.viewModel?.searchString {
+            self.delegate?.didEnter(searchString, for: categoryId)
         }
     }
     
@@ -47,8 +47,8 @@ final class CategoriesViewController: UITableViewController {
                 if let totalCount = self?.viewModel?.totalCount {
                     self?.countLabel.text = totalCount
                 }
-                if let categoryId = self?.viewModel?.identifierForSelectedCategory {
-                    self?.delegate?.didSelectCategory(with: categoryId)
+                if let categoryId = self?.viewModel?.identifierForSelectedCategory, let searchString = self?.viewModel?.searchString {
+                    self?.delegate?.didEnter(searchString, for: categoryId)
                 }
             }
         }
@@ -69,9 +69,11 @@ final class CategoriesViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let categoryId = self.viewModel?.identifierForSelectedCategory {
-            self.delegate?.didSelectCategory(with: categoryId)
+        if let categoryId = self.viewModel?.identifierForSelectedCategory, let searchString = self.viewModel?.searchString {
+            self.delegate?.didEnter(searchString, for: categoryId)
         }
+        
+        searchBar.text = viewModel?.searchString
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +105,7 @@ final class CategoriesViewController: UITableViewController {
         }
         
         if let categoryId = viewModel.identifierForSubcategory(at: indexPath.row) {
-            delegate?.didSelectCategory(with: categoryId)
+            delegate?.didEnter(viewModel.searchString, for: categoryId)
         }
         
         if viewModel.isSelectionAllowed(at: indexPath.row) {
@@ -128,8 +130,18 @@ final class CategoriesViewController: UITableViewController {
 extension CategoriesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, let categoryId = viewModel?.identifierForSelectedCategory {
-            self.delegate?.didFinish(with: text, categoryId: categoryId)
+            viewModel?.searchString = text
+            self.delegate?.didEnter(text, for: categoryId)
         }
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            viewModel?.searchString = searchText
+            if let categoryId = viewModel?.identifierForSelectedCategory {
+                self.delegate?.didEnter("", for: categoryId)
+            }
+        }
     }
 }

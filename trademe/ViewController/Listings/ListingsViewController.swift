@@ -25,12 +25,13 @@ struct ListingCellViewModel: ListItemCellViewModelProtocol {
 }
 
 extension ListingsViewController: CategorySelectionDelegate {
+    
     func didSelectCategory(with id: String) {
-        viewModel?.fetchListings(for: id)
+        viewModel?.fetchListings(for: "", in: id)
     }
     
-    func didFinish(with searchString: String, categoryId: String) {
-        viewModel?.fetchListings(for: categoryId, searchString: searchString)
+    func didEnter(_ searchString: String, for category: String) {
+        viewModel?.fetchListings(for: searchString, in: category)
     }
 }
 
